@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "Sagar08082004/docker-demo"
+        DOCKER_IMAGE = "Sagar08082004/docker-demo:latest"
     }
 
     stages {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/SagarNajardhane/DevOps_Assingment_8A.git'
+                git branch: 'main',
+                    url: 'https://github.com/SagarNajardhane/DevOps_Assingment_8A.git'
             }
         }
 
@@ -26,7 +27,10 @@ pipeline {
                     usernameVariable: 'USERNAME',
                     passwordVariable: 'PASSWORD'
                 )]) {
-                    bat 'echo %PASSWORD% | docker login -u %USERNAME% --password-stdin'
+                    bat '''
+                    docker logout
+                    echo %PASSWORD% | docker login -u %USERNAME% --password-stdin
+                    '''
                 }
             }
         }
