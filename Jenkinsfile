@@ -9,7 +9,8 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/SagarNajardhane/DevOps_Assingment_8A.git'
+                git branch: 'main',
+                    url: 'https://github.com/SagarNajardhane/DevOps_Assingment_8A.git'
             }
         }
 
@@ -21,13 +22,7 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-cred',
-                    usernameVariable: 'USERNAME',
-                    passwordVariable: 'PASSWORD'
-                )]) {
-                    bat 'echo %PASSWORD% | docker login -u %USERNAME% --password-stdin'
-                }
+                bat 'docker login -u Sagar08082004 -p dckr_pat_5qub4DyZukWwVjbBi5zCfGB_dP0D'
             }
         }
 
